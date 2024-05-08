@@ -2,13 +2,13 @@
 // Created by Scott Nideffer on 5/8/24.
 //
 
-#ifndef REQUIRED_H
-#define REQUIRED_H
+#ifndef REQUIRED_HPP
+#define REQUIRED_HPP
 
 #include <iostream>
 
 // Required Functions
-int getInteger();
+int getInteger(int min, int max);
 std::string getLnumber();
 float getGPA();
 //Function needs to return array...array is struct...
@@ -24,4 +24,4 @@ struct Student {
     float GPA;
 };
 
-#endif //REQUIRED_H
+#endif //REQUIRED_HPP
