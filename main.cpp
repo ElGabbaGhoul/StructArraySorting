@@ -2,15 +2,11 @@
 #include "required.hpp"
 
 
-int main()
-{
-    int min = 1;
-    int max = 20;
-
-
+int main(){
     int numStds = getInteger(1,20);
-    createArray(numStds);
+    Student *students = createArray(numStds);
     std::cout << "Number of students: " << numStds << "." << std::endl;
+    displayArrays(students, numStds);
 
 
     return 0;

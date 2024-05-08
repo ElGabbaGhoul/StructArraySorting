@@ -12,7 +12,7 @@ struct Student {
     std::string lNum;
     std::string nameF;
     std::string nameL;
-    //float GPA;
+    float GPA;
 };
 
 // Required Functions
@@ -21,7 +21,7 @@ std::string getLnumber();
 float getGPA();
 //Function needs to return array...array is struct...
 Student* createArray(int arrSize);
-void displayArrays();
+void displayArrays(Student *arr, int arrSize);
 bool binSearch();
 
 #endif //REQUIRED_HPP

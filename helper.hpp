@@ -5,7 +5,9 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+#include <iostream>
+
 void insertArray();
-
-
+std::string getFirstName();
+std::string getLastName();
 #endif //HELPER_H
