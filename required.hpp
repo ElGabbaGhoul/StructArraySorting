@@ -7,21 +7,21 @@
 
 #include <iostream>
 
-// Required Functions
-int getInteger(int min, int max);
-std::string getLnumber();
-float getGPA();
-//Function needs to return array...array is struct...
-std::string createArray(int arrSize);
-void displayArrays();
-bool binSearch();
-
 // Student Struct
 struct Student {
     std::string lNum;
     std::string nameF;
     std::string nameL;
-    float GPA;
+    //float GPA;
 };
+
+// Required Functions
+int getInteger(int min, int max);
+std::string getLnumber();
+float getGPA();
+//Function needs to return array...array is struct...
+Student* createArray(int arrSize);
+void displayArrays();
+bool binSearch();
 
 #endif //REQUIRED_HPP

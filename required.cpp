@@ -40,17 +40,27 @@ std::string getLnumber() {
 float getGPA() {
 
 }
-//Function needs to return array...array is struct...
-std::string createArray(int arrSize) {
-    std::string **students;
-//     ◦ pass in the desired size
-// ◦ create an array of Student structs
 
-    // I have no idea what to do here lmao
-    students = new *struct Student[arrSize];
-// ◦ then loop the proper number of times
-//     ▪ get an Lnumber, firstName, lastName, GPA
-// ◦ Return the array when done
+
+Student* createArray(int arrSize) {
+    Student* students = new Student[arrSize];
+
+    for (int i = 0; i < arrSize; i++) {
+        std::string lNumIn, firstIn, lastIn;
+        std::cout << "Give me the next student: Lnumber, first name, then last name." << std::endl;
+        std::cin >> lNumIn >> firstIn >> lastIn;
+        students[i].lNum = lNumIn;
+        students[i].nameF = firstIn;
+        students[i].nameL = lastIn;
+    }
+
+    for (int i = 0; i < arrSize; i++) {
+        std::cout << i + 1 << ": " << students[i].lNum
+        << " " << students[i].nameF
+        << " " << students[i].nameL
+        << std::endl;
+    }
+    return students;
 }
 void displayArrays() {
 
