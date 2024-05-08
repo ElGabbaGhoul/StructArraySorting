@@ -9,6 +9,7 @@ int main()
 
 
     int numStds = getInteger(1,20);
+    createArray(numStds);
     std::cout << "Number of students: " << numStds << "." << std::endl;
 
 

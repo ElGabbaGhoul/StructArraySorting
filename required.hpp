@@ -12,7 +12,7 @@ int getInteger(int min, int max);
 std::string getLnumber();
 float getGPA();
 //Function needs to return array...array is struct...
-std::string createArray();
+std::string createArray(int arrSize);
 void displayArrays();
 bool binSearch();
 
