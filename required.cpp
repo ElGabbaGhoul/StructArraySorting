@@ -160,40 +160,67 @@ void displayArrays(Student *arr, int arrSize) {
 }
 
 bool binSearch(Student *arr, std::string q, int numStds) {
-        int index = -1;
-        int min = 0; int max = numStds - 1;
-        int lookat;
+        int l = 0;
+        int r = numStds - 1;
+        int index;
 
-        while (min <= max){
-            lookat = (min + max) / 2;
-            if (q < arr[lookat].nameL){
-                max = lookat - 1;
-            } else if (q > arr[lookat].nameL){
-                min = lookat + 1;
+        while (l <= r) {
+            index = (l + r) / 2;
+            // if lookat is name
+            if (q < arr[index].nameL) {
+                r = index - 1;
+            } else if (q > arr[index].nameL) {
+                l = index + 1;
             } else {
-                index = lookat;
-                min = max + 1;
+                std::string student = arr[index].nameL;
+                std::cout << arr[index].nameF << " ";
+                std::cout << arr[index].nameL << " ";
+                std::cout << arr[index].GPA << "." << std::endl;
+                l = r + 1;
                 return true;
             }
+
+            // if (arr[lookat].nameL == q) {
+            //     std::cout << arr[lookat].nameF << " ";
+            //     std::cout << arr[lookat].nameL << " ";
+            //     std::cout << arr[lookat].GPA << "." << std::endl;
+            // } else if ( q < arr[lookat].nameL) {
+            //     min = lookat + 1;
+            // } else {
+            //     min = lookat + 1;
+            // }
+            return false;
         }
-        return false;
-
-
-        // Tried implementing recursive binary search
-        // It wasn't working ToT
-
-        //    if (totalLines >= l) {
-        //        int mid = l + (totalLines - 1) / 2;
-        //        if(namesArray[mid] == query) {
-        //            return true;
-        //        }
-        //        if (namesArray[mid] > query) {
-        //            return binSearch(namesArray, l, mid - 1, query);
-        //        }
-        //
-        //        return binSearch(namesArray, mid + 1, totalLines, query);
-        //    }
-        //
-        //    return false;
 }
 
+
+
+//     if (q < arr[lookat].nameL){
+//         max = lookat - 1;
+//     } else if (q > arr[lookat].nameL){
+//         min = lookat + 1;
+//     } else {
+//         index = lookat;
+//         min = max + 1;
+//         return true;
+//     }
+// }
+// return false;
+
+
+// Tried implementing recursive binary search
+// It wasn't working ToT
+
+//    if (totalLines >= l) {
+//        int mid = l + (totalLines - 1) / 2;
+//        if(namesArray[mid] == query) {
+//            return true;
+//        }
+//        if (namesArray[mid] > query) {
+//            return binSearch(namesArray, l, mid - 1, query);
+//        }
+//
+//        return binSearch(namesArray, mid + 1, totalLines, query);
+//    }
+//
+//    return false;
