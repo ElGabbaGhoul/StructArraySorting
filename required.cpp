@@ -5,6 +5,7 @@
 #include "required.hpp"
 #include "helper.hpp"
 #include <iostream>
+#include <algorithm>
 
 // Required Functions
 int getInteger(int min, int max) {
@@ -112,6 +113,30 @@ Student* createArray(int arrSize) {
 }
 
 void displayArrays(Student *arr, int arrSize) {
+    // Display Unsorted
+    // std::cout << "Unsorted Array: " << std::endl;
+    // for (int i = 0; i < arrSize; i++) {
+    //     std::cout << i + 1
+    //     << ": " << "L00" << arr[i].lNum
+    //     << " " << arr[i].nameF
+    //     << " " << arr[i].nameL
+    //     << " " << arr[i].GPA
+    //     << std::endl;
+    // }
+    // // Display sorted by first
+    // std::cout << "Sorted Array by First: " << std::endl;
+    // std::sort(&arr[0], &arr[arrSize], sortByFirst);
+    // for (int i = 0; i < arrSize; i++) {
+    //     std::cout << i + 1
+    //     << ": " << "L00" << arr[i].lNum
+    //     << " " << arr[i].nameF
+    //     << " " << arr[i].nameL
+    //     << " " << arr[i].GPA
+    //     << std::endl;
+    // }
+        // Display sorted by Lnum
+        std::cout << "Sorted Array by LNumber: " << std::endl;
+        std::sort(&arr[0], &arr[arrSize], sortByLNum);
     for (int i = 0; i < arrSize; i++) {
         std::cout << i + 1
         << ": " << "L00" << arr[i].lNum
@@ -119,11 +144,56 @@ void displayArrays(Student *arr, int arrSize) {
         << " " << arr[i].nameL
         << " " << arr[i].GPA
         << std::endl;
+
+        // Display Sorted by last
+        std::cout << "Sorted Array by Last: " << std::endl;
+        std::sort(&arr[0], &arr[arrSize], sortByLast);
+        for (int i = 0; i < arrSize; i++) {
+            std::cout << i + 1
+            << ": " << "L00" << arr[i].lNum
+            << " " << arr[i].nameF
+            << " " << arr[i].nameL
+            << " " << arr[i].GPA
+            << std::endl;
+        }
     }
-    // ◦ display the arrays in columns firstName, lastName, Lnumber, and GPA
-    // ◦ no return values
 }
 
-bool binSearch() {
+bool binSearch(Student *arr, std::string q, int numStds) {
+        int index = -1;
+        int min = 0; int max = numStds - 1;
+        int lookat;
 
+        while (min <= max){
+            lookat = (min + max) / 2;
+            if (q < arr[lookat].nameL){
+                max = lookat - 1;
+            } else if (q > arr[lookat].nameL){
+                min = lookat + 1;
+            } else {
+                index = lookat;
+                min = max + 1;
+                return true;
+            }
+        }
+        return false;
+
+
+        // Tried implementing recursive binary search
+        // It wasn't working ToT
+
+        //    if (totalLines >= l) {
+        //        int mid = l + (totalLines - 1) / 2;
+        //        if(namesArray[mid] == query) {
+        //            return true;
+        //        }
+        //        if (namesArray[mid] > query) {
+        //            return binSearch(namesArray, l, mid - 1, query);
+        //        }
+        //
+        //        return binSearch(namesArray, mid + 1, totalLines, query);
+        //    }
+        //
+        //    return false;
 }
+

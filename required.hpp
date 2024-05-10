@@ -22,6 +22,6 @@ float getGPA();
 //Function needs to return array...array is struct...
 Student* createArray(int arrSize);
 void displayArrays(Student *arr, int arrSize);
-bool binSearch();
+bool binSearch(Student *arr, std::string q, int numStds);
 
 #endif //REQUIRED_HPP

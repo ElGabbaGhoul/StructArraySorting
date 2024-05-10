@@ -3,7 +3,7 @@
 //
 
 #include "helper.hpp"
-
+#include "required.hpp"
 
 void insertArray() {
     /*
@@ -74,3 +74,48 @@ std::string getLastName() {
     }
     return lastName;
 }
+
+std::string getSearchLast() {
+    std::string lastName;
+    bool validLast = false;
+
+    while(!validLast) {
+        std::cout << "Search for a student via last name: " << std::endl;
+        std::cin >> lastName;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(50000, '\n');
+            std::cerr << "Invalid type of input." << std::endl;
+            std::cerr << "Idk how you managed to screw this up?" << std::endl;
+        } else {
+            // every character tolower
+            for (char &c : lastName) {
+                c = std::tolower(c);
+            }
+
+            // first character toupper
+            if (!lastName.empty()) {
+                lastName[0] = std::toupper(lastName[0]);
+            }
+
+            // exit loop
+            validLast = true;
+        }
+    }
+    return lastName;
+
+}
+
+
+bool sortByLast(Student &a, Student&b) {
+    return a.nameL < b.nameL;
+}
+
+bool sortByFirst(Student &a, Student&b) {
+    return a.nameF < b.nameF;
+}
+
+bool sortByLNum(Student &a, Student &b) {
+    return a.lNum < b.lNum;
+}
+
