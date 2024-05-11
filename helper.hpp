@@ -8,7 +8,8 @@
 #include <iostream>
 #include "required.hpp"
 
-void insertArray();
+//void insertArray(); I never found a use for this
+bool isAllDigits(const std::string& str);
 std::string getFirstName();
 std::string getLastName();
 bool sortByLast(Student &a, Student&b);

@@ -23,16 +23,12 @@ int main(){
     do {
         std::string query = getSearchLast();
         binSearch(students, query, numStds);
-        if (binSearch(students, query, numStds)) {
-            // print first, last, gpa
-            std::cout << students->nameF << " " << students->nameL << ", " << students->GPA << "." << std::endl;
-        }
         searches++;
         std::cout << searches << " searches of 5 used." << std::endl;
-    } while (searches <= 5);
+    } while (searches < 5);
 
 
-
+    std::cout << "Thank you for using Nideffer Industries' Student Lookup Program." << std::endl;
 
     return 0;
 }

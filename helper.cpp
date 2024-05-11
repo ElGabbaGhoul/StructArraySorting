@@ -1,19 +1,19 @@
 //
 // Created by Scott Nideffer on 5/8/24.
 //
-
+#include <iostream>
 #include "helper.hpp"
 #include "required.hpp"
 
-void insertArray() {
-    /*
-◦ pass in the array containing the new item in the last location
-◦ pass in the current count of items and the size of the array
-◦ insert the new item in the proper location in the array
-◦ update the array via reference
-◦ no return values
- **/
-}
+//void insertArray() {
+//    /*
+//◦ pass in the array containing the new item in the last location
+//◦ pass in the current count of items and the size of the array
+//◦ insert the new item in the proper location in the array
+//◦ update the array via reference
+//◦ no return values
+// **/
+//}
 
 std::string getFirstName() {
     std::string firstName;
@@ -111,6 +111,7 @@ bool sortByLast(Student &a, Student&b) {
     return a.nameL < b.nameL;
 }
 
+// never used, delete
 bool sortByFirst(Student &a, Student&b) {
     return a.nameF < b.nameF;
 }
@@ -119,3 +120,11 @@ bool sortByLNum(Student &a, Student &b) {
     return a.lNum < b.lNum;
 }
 
+bool isAllDigits(const std::string& str){
+    for (char c : str){
+        if (!isdigit(c)){
+            return false;
+        }
+    }
+    return true;
+}

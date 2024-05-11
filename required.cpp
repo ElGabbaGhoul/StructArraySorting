@@ -5,6 +5,7 @@
 #include "required.hpp"
 #include "helper.hpp"
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
 
 // Required Functions
@@ -39,28 +40,28 @@ int getInteger(int min, int max) {
 
 std::string getLnumber() {
     std::string lNumIn;
-    bool validLNum;
+    bool validLNum = false;
 
-    while (!validLNum) {
+    do {
         std::cout << "What is this student's L-Number?" << std::endl;
         std::cout << "L00XXXXXX: " << std::endl;
         std::cin >> lNumIn;
-        if (std::cin.fail()) {
+        if (lNumIn.length() !=6 || !isAllDigits(lNumIn)) {
             // type check
             std::cin.clear();
             std::cin.ignore(50000, '\n');
             std::cerr << "Invalid type of input." << std::endl;
-            std::cerr << "Please enter the right thing dingus" << std::endl;
+            std::cerr << "Please enter exactly 6 digits between 111111 and 999999." << std::endl;
         } else if (lNumIn < "111111" || lNumIn > "999999") {
             // range check
             std::cin.clear();
             std::cin.ignore(50000, '\n');
-            std::cerr << "Invalid type of input." << std::endl;
-            std::cerr << "Please enter a string of 6 digits between 111111 and 999999" << std::endl;
+            std::cerr << "Input out of range." << std::endl;
+            std::cerr << "Please enter exactly 6 digits between 111111 and 999999." << std::endl;
         } else {
             validLNum = true;
         }
-    }
+    } while (!validLNum);
     return lNumIn;
 }
 
@@ -90,7 +91,7 @@ float getGPA() {
             validGPA = true;
         }
     }
-    return GPAIn;
+    return validGPA;
     // ◦ returns it as a float
 }
 
@@ -113,38 +114,16 @@ Student* createArray(int arrSize) {
 }
 
 void displayArrays(Student *arr, int arrSize) {
-    // Display Unsorted
-    // std::cout << "Unsorted Array: " << std::endl;
-    // for (int i = 0; i < arrSize; i++) {
-    //     std::cout << i + 1
-    //     << ": " << "L00" << arr[i].lNum
-    //     << " " << arr[i].nameF
-    //     << " " << arr[i].nameL
-    //     << " " << arr[i].GPA
-    //     << std::endl;
-    // }
-    // // Display sorted by first
-    // std::cout << "Sorted Array by First: " << std::endl;
-    // std::sort(&arr[0], &arr[arrSize], sortByFirst);
-    // for (int i = 0; i < arrSize; i++) {
-    //     std::cout << i + 1
-    //     << ": " << "L00" << arr[i].lNum
-    //     << " " << arr[i].nameF
-    //     << " " << arr[i].nameL
-    //     << " " << arr[i].GPA
-    //     << std::endl;
-    // }
         // Display sorted by Lnum
         std::cout << "Sorted Array by LNumber: " << std::endl;
         std::sort(&arr[0], &arr[arrSize], sortByLNum);
     for (int i = 0; i < arrSize; i++) {
         std::cout << i + 1
-        << ": " << "L00" << arr[i].lNum
-        << " " << arr[i].nameF
-        << " " << arr[i].nameL
-        << " " << arr[i].GPA
-        << std::endl;
-
+                  << ": " << "L00" << arr[i].lNum
+                  << " " << arr[i].nameF
+                  << " " << arr[i].nameL
+                  << " " << std::fixed << std::setprecision(2) << std::setw(4) << std::setfill('0') << arr[i].GPA + 1 << std::endl;
+    }
         // Display Sorted by last
         std::cout << "Sorted Array by Last: " << std::endl;
         std::sort(&arr[0], &arr[arrSize], sortByLast);
@@ -153,74 +132,48 @@ void displayArrays(Student *arr, int arrSize) {
             << ": " << "L00" << arr[i].lNum
             << " " << arr[i].nameF
             << " " << arr[i].nameL
-            << " " << arr[i].GPA
-            << std::endl;
+            // format to always show 2 decimal precision
+            << " " << std::fixed << std::setprecision(2) << std::setw(4) << std::setfill('0') << arr[i].GPA + 1 << std::endl;
         }
-    }
 }
 
 bool binSearch(Student *arr, std::string q, int numStds) {
         int l = 0;
         int r = numStds - 1;
-        int index;
+        bool found = false;
 
         while (l <= r) {
-            index = (l + r) / 2;
-            // if lookat is name
+            int index = (l + r) / 2;
             if (q < arr[index].nameL) {
                 r = index - 1;
             } else if (q > arr[index].nameL) {
                 l = index + 1;
             } else {
-                std::string student = arr[index].nameL;
-                std::cout << arr[index].nameF << " ";
-                std::cout << arr[index].nameL << " ";
-                std::cout << arr[index].GPA << "." << std::endl;
+                found = true;
+                std::cout << "Student(s) found with last name '" << q <<  "' found." << std::endl;
+
+                // Print all students with same last name
+                int i = index;
+                while ( i >= l && arr[i].nameL == q){
+                    std::cout << arr[i].nameL << ", ";
+                    std::cout << arr[i].nameF << ".";
+                    std::cout << " " << std::fixed << std::setprecision(2) << std::setw(4) << std::setfill('0') << arr[i].GPA + 1 << std::endl;
+                    i--;
+                }
+                i = index + 1;
+                while (i <= r && arr[i].nameL == q){
+                    std::cout << arr[i].nameL << ", ";
+                    std::cout << arr[i].nameF << ".";
+                    std::cout << " " << std::fixed << std::setprecision(2) << std::setw(4) << std::setfill('0') << arr[i].GPA + 1 << std::endl;
+                    i++;
+                }
+                // Exit loop
                 l = r + 1;
-                return true;
             }
-
-            // if (arr[lookat].nameL == q) {
-            //     std::cout << arr[lookat].nameF << " ";
-            //     std::cout << arr[lookat].nameL << " ";
-            //     std::cout << arr[lookat].GPA << "." << std::endl;
-            // } else if ( q < arr[lookat].nameL) {
-            //     min = lookat + 1;
-            // } else {
-            //     min = lookat + 1;
-            // }
-            return false;
         }
+    // None found
+    if (!found){
+        std::cerr << "No student with last name '" << q <<  "' found." << std::endl;
+    }
+    return found;
 }
-
-
-
-//     if (q < arr[lookat].nameL){
-//         max = lookat - 1;
-//     } else if (q > arr[lookat].nameL){
-//         min = lookat + 1;
-//     } else {
-//         index = lookat;
-//         min = max + 1;
-//         return true;
-//     }
-// }
-// return false;
-
-
-// Tried implementing recursive binary search
-// It wasn't working ToT
-
-//    if (totalLines >= l) {
-//        int mid = l + (totalLines - 1) / 2;
-//        if(namesArray[mid] == query) {
-//            return true;
-//        }
-//        if (namesArray[mid] > query) {
-//            return binSearch(namesArray, l, mid - 1, query);
-//        }
-//
-//        return binSearch(namesArray, mid + 1, totalLines, query);
-//    }
-//
-//    return false;
