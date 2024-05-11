@@ -16,12 +16,18 @@ struct Student {
 };
 
 // Required Functions
+
+// gets integer for # of students
 int getInteger(int min, int max);
+// gets lnumber
 std::string getLnumber();
+// gets gpa
 float getGPA();
-//Function needs to return array...array is struct...
+// creates student struct arrays
 Student* createArray(int arrSize);
+// displays arrays sorted by last / lnum
 void displayArrays(Student *arr, int arrSize);
+// binary search for searching by lastname
 bool binSearch(Student *arr, std::string q, int numStds);
 
 #endif //REQUIRED_HPP
