@@ -4,6 +4,7 @@
 #include <iostream>
 #include "helper.hpp"
 #include "required.hpp"
+#include <cctype>
 
 //void insertArray() {
 //    /*
@@ -22,11 +23,18 @@ std::string getFirstName() {
     while(!validFirst) {
         std::cout << "Student first name: " << std::endl;
         std::cin >> firstName;
-        if (std::cin.fail()) {
+
+        bool allAlpha = true;
+        for (char c : firstName){
+            if (!std::isalpha(c)){
+                allAlpha = false;
+            }
+        }
+
+        if (!allAlpha) {
+            std::cerr << "Invalid input. Last name should only contain alphabet characters." << std::endl;
             std::cin.clear();
             std::cin.ignore(50000, '\n');
-            std::cerr << "Invalid type of input." << std::endl;
-            std::cerr << "Idk how you managed to screw this up?" << std::endl;
         } else {
             // every character tolower
             for (char &c : firstName) {
@@ -52,11 +60,18 @@ std::string getLastName() {
     while(!validLast) {
         std::cout << "Student last name: " << std::endl;
         std::cin >> lastName;
-        if (std::cin.fail()) {
+
+        bool allAlpha = true;
+        for (char c : lastName){
+            if (!std::isalpha(c)){
+                allAlpha = false;
+            }
+        }
+
+        if (!allAlpha) {
+            std::cerr << "Invalid input. Last name should only contain alphabet characters." << std::endl;
             std::cin.clear();
             std::cin.ignore(50000, '\n');
-            std::cerr << "Invalid type of input." << std::endl;
-            std::cerr << "Idk how you managed to screw this up?" << std::endl;
         } else {
             // every character tolower
             for (char &c : lastName) {
@@ -106,14 +121,8 @@ std::string getSearchLast() {
 
 }
 
-
 bool sortByLast(Student &a, Student&b) {
     return a.nameL < b.nameL;
-}
-
-// never used, delete
-bool sortByFirst(Student &a, Student&b) {
-    return a.nameF < b.nameF;
 }
 
 bool sortByLNum(Student &a, Student &b) {
